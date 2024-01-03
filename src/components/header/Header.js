@@ -8,13 +8,6 @@ function Header() {
       <StyledHeader className="header">
         <Navigation />
       </StyledHeader>
-      <h1>
-        HelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHello
-        HelloHelloHelloHello
-        HelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHello
-        HelloHelloHelloHelloHelloHello
-        HelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHello
-      </h1>
     </>
   );
 }

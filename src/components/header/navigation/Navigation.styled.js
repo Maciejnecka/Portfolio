@@ -1,11 +1,29 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { media } from '../../styled/mediaqueries';
+
+const slideIn = keyframes`
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+`;
+
+const slideOut = keyframes`
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
+`;
 
 export const StyledNavigation = styled.nav`
   .navigation__list {
     list-style: none;
     display: flex;
-    padding: 0.5rem;
+    padding: 1.5rem;
     font-size: 1rem;
   }
   .navigation__item {
@@ -49,13 +67,9 @@ export const StyledNavigation = styled.nav`
   &.open {
     display: flex;
     background-color: var(--color-navbar-background);
-    position: fixed;
-    top: 0;
-    right: 0;
     height: 100%;
     width: 40%;
-    transform: translateX(0);
-    transition: transform 0.5s ease-in-out;
+    animation: ${slideIn} 0.5s ease-in-out forwards;
     background: rgba(39, 39, 38, 0.6);
     border-top-left-radius: 16px;
     border-bottom-left-radius: 16px;
@@ -71,6 +85,10 @@ export const StyledNavigation = styled.nav`
       margin-left: 0;
       left: 0;
     }
+  }
+
+  &.closed {
+    animation: ${slideOut} 0.5s ease-in-out;
   }
 
   ${media.small`

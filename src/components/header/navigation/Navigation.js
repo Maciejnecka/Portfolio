@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { StyledNavigation, StyledMenuIcon } from './Navigation.styled';
 import HamburgerIcon from '../../../icons/Hamburger.svg';
 import CloseMark from '../../../icons/CloseMark.svg';
@@ -6,9 +6,19 @@ import CloseMark from '../../../icons/CloseMark.svg';
 function Navigation() {
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const navigationRef = useRef(null);
 
   const toggleNav = () => {
     setIsNavOpen((prevIsNavOpen) => !prevIsNavOpen);
+  };
+
+  const closeNav = () => {
+    setIsNavOpen(false);
+  };
+
+  const handleCloseMarkClick = (event) => {
+    event.stopPropagation();
+    closeNav();
   };
 
   useEffect(() => {
@@ -19,16 +29,32 @@ function Navigation() {
       }
     };
 
+    const handleClickOutside = (event) => {
+      if (
+        navigationRef.current &&
+        !navigationRef.current.contains(event.target) &&
+        isNavOpen &&
+        !event.target.classList.contains('icon')
+      ) {
+        closeNav();
+      }
+    };
+
     window.addEventListener('resize', handleResize);
+    document.addEventListener('mousedown', handleClickOutside);
 
     return () => {
       window.removeEventListener('resize', handleResize);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [isNavOpen]);
 
   return (
     <>
-      <StyledNavigation className={`navigation ${isNavOpen ? 'open' : ''}`}>
+      <StyledNavigation
+        ref={navigationRef}
+        className={`navigation ${isNavOpen ? 'open' : 'closed'}`}
+      >
         <ul className="navigation__list">
           <li className="navigation__item">
             <a className="navigation__link" href="#">
@@ -65,6 +91,7 @@ function Navigation() {
           className={`icon ${isNavOpen ? '' : 'hidden'}`}
           src={CloseMark}
           alt="Close Mark"
+          onClick={handleCloseMarkClick}
         />
       </StyledMenuIcon>
     </>
