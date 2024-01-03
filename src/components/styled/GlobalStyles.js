@@ -6,11 +6,16 @@ const GlobalStyles = createGlobalStyle`
 
    --font-main-gray: #A3A3A2;
    --font-main-white: #DADADA;
+
+   --main-color-blue: #0F8B8D;
+   --main-color-dark: #05494A;
+
+   --transition: all 0.5s;
 }
 
 body{
    background-color: var(--color-main-background);
-   color: var(--font-main-gray)
+   color: var(--font-main-gray);
 }
 //TODO temp
 p{
