@@ -3,6 +3,7 @@ import { createGlobalStyle } from 'styled-components';
 const GlobalStyles = createGlobalStyle`
 :root{
    --color-main-background: #1A1A20; 
+   --color-navbar-background: #272726;
 
    --font-main-gray: #A3A3A2;
    --font-main-white: #DADADA;
